@@ -1,9 +1,0 @@
-cmake_minimum_required(VERSION 3.10)
-project(bit_fluent_driver)
-
-include_directories(inc/)
-add_library(socket_utils src/socket_utils.c)
-
-add_executable(main src/main.c)
-
-target_link_libraries(main socket_utils)
