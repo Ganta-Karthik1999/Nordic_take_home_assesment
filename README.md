@@ -80,23 +80,25 @@ The value is parsed and classified as **odd** or **even**.
 ## Project Structure
 
 ```
-project/
-│
-├── inc/
+.
+├── inc
 │   ├── common.h
+│   ├── counter.h
+│   ├── json.h
+│   ├── post.h
 │   ├── socket_utils.h
 │   └── timer.h
-│
-├── src/
-│   ├── main.c
-│   ├── socket_utils.c
-│   ├── timer.c
-│   ├── json.c
-│   ├── counter.c
-│   └── post.c
-│
 ├── Makefile
-└── README.md
+├── README.md
+├── server
+└── src
+    ├── counter.c
+    ├── json.c
+    ├── main.c
+    ├── post.c
+    ├── socket_utils.c
+    └── timer.c
+
 ```
 
 ---
@@ -117,9 +119,26 @@ sudo apt install libjson-c-dev libcurl4-openssl-dev
 
 Compile using the Makefile:
 
+Install Dependencies
 ```
-make
+make install
 ```
+
+Compile the Target
+```
+make all
+```
+Run the Target
+```
+make run
+```
+
+clean the Target
+```
+make clean
+```
+
+
 
 Or compile manually:
 
@@ -170,20 +189,7 @@ Response: https://paste.c-net.org/ParadeRoutine
 
 ---
 
-## Thread Safety
 
-Multiple client threads update shared counters simultaneously.  
-A **pthread mutex** protects access to shared variables.
-
-Example:
-
-```c
-pthread_mutex_lock(&count_mutex);
-even++;
-pthread_mutex_unlock(&count_mutex);
-```
-
----
 
 ## Timer Design
 
@@ -224,11 +230,8 @@ The server will:
 
 Future improvements could include:
 
-- Using `timerfd` for Linux-native timers
-- Supporting persistent client connections
-- Adding structured logging
+- Adding the Security probabilily AES 256
 - Making server configuration configurable
-- Running the server as a system daemon
 
 ---
 
