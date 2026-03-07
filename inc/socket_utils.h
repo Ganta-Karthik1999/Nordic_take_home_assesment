@@ -21,15 +21,29 @@
 extern volatile sig_atomic_t running;
 extern volatile int active_connections;
 
-
+/**
+ * @brief Initializes the TCP server socket and required system resources.
+ * **/
 int socket_init(int *sockfd, int opt);
 
-// Accept the Client connection
+/**
+ *  @brief Accepts the client connection.
+ * 
+ * **/
 int accept_client(int sockfd);
 
-// 
+
 void handle_sigint(int sig);
+/**
+ * @brief Thread routine to handle a single client connection.
+ * 
+ * **/
 void *handle_client(void *arg);
+
+/**
+ * @brief Cleanly shuts down the server and releases allocated resources.
+ * 
+ * **/
 void socket_close();
 
 #endif
