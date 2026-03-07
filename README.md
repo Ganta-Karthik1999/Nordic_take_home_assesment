@@ -133,6 +133,10 @@ The value is parsed and classified as **odd** or **even**.
 
 Install required libraries.
 
+libjson-c-dev
+libcurl
+pthreads
+
 ### Ubuntu / Debian
 
 ```
@@ -198,6 +202,77 @@ The server listens on:
 
 ---
 
+## Design Notes
+
+### Timer Implementation
+
+The timer functionality is implemented using a dedicated thread (`timer_thread_func`).  
+This approach ensures that the periodic reporting mechanism is independent of the
+networking code.
+
+If the timer logic were placed inside the socket loop, it could be blocked by
+`accept()` or `recv()` system calls when no client connections are present.
+
+Using a separate timer thread guarantees that POST requests are triggered every
+60 seconds regardless of client activity.
+
+### Connection Handling
+
+A thread-per-connection model is used for handling incoming clients.  
+Each client connection is processed in a separate worker thread using `pthread_create`.
+
+This approach simplifies the design and ensures that the server can process
+multiple client requests concurrently.
+
+### Assumptions
+
+- Each client connection sends a single JSON message before disconnecting.
+- The JSON payload always contains a valid `rand_value` field.
+- Incoming data fits within the buffer size allocated in the server.
+
+
+## Dependency Justification
+
+### pthread (POSIX Threads)
+
+Used to implement the multi-threaded architecture.
+
+- Worker threads handle incoming client connections.
+- A dedicated timer thread handles periodic reporting.
+
+Experience Level: **Intermediate**
+
+I have used pthreads in several Linux system programming projects involving
+concurrent networking and shared resource synchronization.
+
+---
+
+### json-c
+
+Used for parsing JSON messages received from the TCP client.
+
+Reasons for choosing json-c:
+
+- Lightweight C library
+- Simple API for extracting JSON fields
+- Widely used in Linux system software
+
+Experience Level: **Beginner–Intermediate**
+
+---
+
+### libcurl
+
+Used to send HTTP POST requests to `https://paste.c-net.org`.
+
+Reasons for choosing libcurl:
+
+- Standard HTTP client library for C
+- Provides easy support for HTTPS
+- Well documented and stable
+
+Experience Level: **Intermediate**
+
 ## Example Client
 
 Using Fluent Bit:
@@ -258,6 +333,7 @@ Future improvements could include:
 
 - Adding the Security probabilily AES 256
 - Making server configuration configurable
+- Replace `sleep()` with `timerfd` for a more robust Linux timer implementation.
 
 ---
 
