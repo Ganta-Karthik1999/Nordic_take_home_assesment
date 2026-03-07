@@ -8,23 +8,29 @@ volatile int active_connections = 0;
 pthread_mutex_t count_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 int main()
-{    
-    int sockfd =0, opt = 1;
-    if (socket_init(&sockfd, opt) != 0) {
+{  
+      int sockfd =0, opt = 1;
+      pthread_t timer_thread;
+   
+      if (socket_init(&sockfd, opt) != 0) {
         fprintf(stderr, "Socket init failed\n");
         return 1;
     }
-    long last_time = get_time_ms();
-    int interval_ms = 60000;  
+ 
+    if (pthread_create(&timer_thread, NULL, timer_thread_func, NULL) != 0) {
+        perror("pthread_create timer_thread");
+        curl_global_cleanup();
+        close(sockfd);
+        return 1;
+    }
 
+    pthread_detach(timer_thread);
+   
     while (running == 1) {
-        process_timer_event(&last_time, interval_ms);
-        
         int rc = accept_client(sockfd);
         if (rc < 0) {
             break;
-        }
-       
+        }      
       
  }
 

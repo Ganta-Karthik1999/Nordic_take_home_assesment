@@ -5,7 +5,8 @@
 #include <time.h>
 
 
-long get_time_ms(void);
-void process_timer_event(long *last_time, int interval_ms);
+// long get_time_ms(void);
+// void process_timer_event(long *last_time, int interval_ms);
 
+void *timer_thread_func(void *arg);
 #endif

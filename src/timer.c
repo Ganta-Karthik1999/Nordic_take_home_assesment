@@ -1,29 +1,27 @@
 #include"timer.h"
+#include <unistd.h>
+#include <stdint.h>
+#include <pthread.h>
 #include "socket_utils.h"
 
-/**
- * @brief Function uses system clock to return time in milliseconds
- * @return Time in milliseconds
- */
-long get_time_ms(void) {
-    struct timespec ts;
-    clock_gettime(CLOCK_MONOTONIC, &ts);
-    return ts.tv_sec * 1000 + ts.tv_nsec / 1000000;
-}
+extern volatile uint64_t odd;
+extern volatile uint64_t even;
+extern volatile sig_atomic_t running;
+extern pthread_mutex_t count_mutex;
 
-void process_timer_event(long *last_time, int interval_ms)
+void *timer_thread_func(void *arg)
 {
-    long now = get_time_ms();
-    // printf("\r%d",now);
-    if (now - *last_time >= interval_ms) {
-        // printf("Timer fired!\n");
+    (void)arg;
 
-        pthread_mutex_lock(&count_mutex);
+    while (running) {
+        sleep(60);
         send_post_request(odd, even);
+        pthread_mutex_lock(&count_mutex);
         odd = 0;
         even = 0;
         pthread_mutex_unlock(&count_mutex);
-        printf("odd=%d even=%d\n",odd,even);
-        *last_time = now;
+
     }
+
+    return NULL;
 }

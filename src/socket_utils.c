@@ -15,7 +15,7 @@ int socket_init(int *sockfd, int opt)
     int status;
     struct sockaddr_in addr;
     struct sigaction sa;
-
+    //  Calls the handle_signal function initialized above
     sa.sa_handler = handle_sigint;
     sa.sa_flags = 0;
     sigemptyset(&sa.sa_mask);
@@ -69,8 +69,6 @@ int socket_init(int *sockfd, int opt)
 }
 
 
-
-// Thread function to handle each client
 void *handle_client(void *arg) {
     int clientfd = *((int *)arg);
     free(arg);  
@@ -86,12 +84,12 @@ void *handle_client(void *arg) {
         }
     }
 
-     pthread_mutex_lock(&count_mutex);
+    //  pthread_mutex_lock(&count_mutex);
 
     // printf("Thread exiting: %lu\n",
     //        (unsigned long)pthread_self());
 
-    pthread_mutex_unlock(&count_mutex);
+    // pthread_mutex_unlock(&count_mutex);
     close(clientfd);
     return NULL;
 }
