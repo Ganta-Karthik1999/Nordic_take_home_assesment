@@ -1,8 +1,14 @@
+CC      := gcc
+LIBS    := json-c -lcurl -pthread
+TARGET  := server
+SRCS    := src/main.c src/socket_utils.c
+INCLUDE := inc
+
 all:
-	gcc -o server src/main.c src/socket_utils.c -I inc -ljson-c -lcurl -pthread
+	$(CC) -o $(TARGET) $(SRCS) -I $(INCLUDE) -l $(LIBS)
 
 run:
-	./server
+	./$(TARGET)
 
 clean:
-	sudo rm -rf server
+	sudo rm -rf $(TARGET)

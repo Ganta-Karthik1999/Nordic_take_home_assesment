@@ -24,8 +24,9 @@ extern volatile sig_atomic_t running;
 extern pthread_mutex_t count_mutex;
 extern volatile int active_connections;
 
-
-
+void process_timer_event(long *last_time, int interval_ms);
+int accept_and_spawn_client(int sockfd);
+int socket_init(int *sockfd, int opt);
 long get_time_ms(void);
 void handle_sigint(int sig);
 void send_post_request(uint64_t odd, uint64_t even);
