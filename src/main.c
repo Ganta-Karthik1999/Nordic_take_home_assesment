@@ -1,4 +1,5 @@
 #include "socket_utils.h"
+#include "timer.h"
 
 volatile uint64_t odd = 0;
 volatile uint64_t even = 0;
@@ -19,7 +20,7 @@ int main()
     while (running == 1) {
         process_timer_event(&last_time, interval_ms);
         
-        int rc = accept_and_spawn_client(sockfd);
+        int rc = accept_client(sockfd);
         if (rc < 0) {
             break;
         }

@@ -1,7 +1,7 @@
 CC      := gcc
 LIBS    := json-c -lcurl -pthread
 TARGET  := server
-SRCS    := src/main.c src/socket_utils.c
+SRCS    := src/main.c src/socket_utils.c src/timer.c src/json.c src/post.c src/counter.c
 INCLUDE := inc
 
 all:
