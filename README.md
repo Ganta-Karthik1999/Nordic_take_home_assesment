@@ -46,6 +46,8 @@ The server is designed using a **multi-threaded architecture**.
             v                             v
     Parse JSON messages           Trigger every 60 sec
     Update odd/even counts        Send HTTP POST request
+                                  and Reset odd and even 
+                                  to 0
 ```
 
 ---
@@ -67,7 +69,7 @@ The server expects JSON messages in the following format:
 
 ```json
 {
-  "rand_value": 12345
+  "rand_value": 183726423746721374(uint64_t) value
 }
 ```
 
