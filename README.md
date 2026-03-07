@@ -52,6 +52,32 @@ The server is designed using a **multi-threaded architecture**.
 
 ---
 
+## Device Configuration
+
+I used a Raspberry pi 5 with the Raspbian OS on it to develop the deamon
+
+'''
+       _,met$$$$$gg.          pi@pi 
+    ,g$$$$$$$$$$$$$$$P.       ----- 
+  ,g$$P"     """Y$$.".        OS: Debian GNU/Linux 12 (bookworm) aarch64 
+ ,$$P'              `$$$.     Host: Raspberry Pi 5 Model B Rev 1.1 
+',$$P       ,ggs.     `$$b:   Kernel: 6.12.62+rpt-rpi-2712 
+`d$$'     ,$P"'   .    $$$    Uptime: 10 hours, 31 mins 
+ $$P      d$'     ,    $$P    Packages: 2050 (dpkg) 
+ $$:      $$.   -    ,d$$'    Shell: bash 5.2.15 
+ $$;      Y$b._   _,d$P'      Terminal: node 
+ Y$$.    `.`"Y$$$$P"'         CPU: (4) @ 2.400GHz 
+ `$$b      "-.__              Memory: 2195MiB / 8063MiB 
+  `Y$$
+   `Y$$.                                              
+     `$$b.                                            
+       `Y$$b.
+          `"Y$b._
+              `"""
+
+
+'''
+
 ## Features
 
 - Multi-threaded TCP server
