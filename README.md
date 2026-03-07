@@ -56,7 +56,7 @@ The server is designed using a **multi-threaded architecture**.
 
 I used a Raspberry pi 5 with the Raspbian OS on it to develop the deamon
 
-'''
+```
        _,met$$$$$gg.          pi@pi 
     ,g$$$$$$$$$$$$$$$P.       ----- 
   ,g$$P"     """Y$$.".        OS: Debian GNU/Linux 12 (bookworm) aarch64 
@@ -76,7 +76,7 @@ I used a Raspberry pi 5 with the Raspbian OS on it to develop the deamon
               `"""
 
 
-'''
+```
 
 ## Features
 
