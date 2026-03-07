@@ -1,10 +1,9 @@
 #ifndef COUNTER_H
 #define COUNTER_H
 
-#include <stdio.h>
-#include <stdint.h>
-#include <json-c/json.h>
-#include <pthread.h>
+#include"common.h"
+#include<json-c/json.h>
+#include<pthread.h>
 
 extern volatile uint64_t odd;
 extern volatile uint64_t even;

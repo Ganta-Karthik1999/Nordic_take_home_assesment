@@ -1,12 +1,11 @@
 #ifndef __TIMER_H__
 #define __TIMER_H__
 
-#include<stdio.h>
+#include"common.h"
 #include <time.h>
 
-
-// long get_time_ms(void);
-// void process_timer_event(long *last_time, int interval_ms);
+//  Time in seconds before each post response
+#define TIMER_INTERVAL_SECONDS 60
 
 void *timer_thread_func(void *arg);
 #endif

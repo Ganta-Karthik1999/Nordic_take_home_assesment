@@ -8,7 +8,7 @@ all:
 	$(CC) -o $(TARGET) $(SRCS) -I $(INCLUDE) -l $(LIBS)
 
 run:
-	./$(TARGET)
+	./$(TARGET) 
 
 clean:
 	sudo rm -rf $(TARGET)
