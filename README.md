@@ -14,7 +14,7 @@ The request contains the number of odd and even values received during the last 
 Example POST body:
 
 ```
-odd=42&even=22
+odd=42 even=22
 ```
 
 The response returned by the server is printed to standard output.
